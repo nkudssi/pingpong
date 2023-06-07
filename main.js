@@ -26,6 +26,11 @@ var ball = {
 
 gamestatus = "";
 
+function preload() {
+  paddletouch = loadSound("ball_touch_paddel.wav");
+  missed = loadSound("missed.wav");
+}
+
 function setup() {
   var canvas = createCanvas(700, 600);
   canvas.parent("canvas")
@@ -144,9 +149,11 @@ function move() {
     if (ball.y >= paddle1Y && ball.y <= paddle1Y + paddle1Height) {
       ball.dx = -ball.dx + 0.5;
       playerscore++;
+      paddletouch.play();
     }
     else {
       pcscore++;
+      missed.play()
       reset();
       navigator.vibrate(100);
     }
